@@ -1,0 +1,40 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+
+import Layout from "../layouts/Layout.astro";
+import Prose from '../components/Prose.astro';
+import FormattedDate from '@/components/FormattedDate.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+
+const entry = await getEntry("info", "sobre-mi");
+const { Content } = await render(entry!);
+
+const posts = (await getCollection("blog")).sort(
+  (b, a) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
+
+const uniqueTags = [
+  ...new Set(
+    posts.flatMap((post) => post.data.tags).filter((tag) => tag !== undefined)
+  ),
+].sort();
+---
+
+<Layout
+  openGraph={{
+    basic: {
+      title: SITE_TITLE,
+      type: "website",
+      image: `${Astro.site}og.png`,
+    },
+    optional: {
+      description: SITE_DESCRIPTION,
+    },
+  }}
+>
+  <Fragment slot="content">
+    <Prose>
+      <Content />
+    </Prose>
+  </Fragment>
+</Layout>
