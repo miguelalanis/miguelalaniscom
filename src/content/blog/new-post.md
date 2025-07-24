@@ -1,7 +1,7 @@
 ---
 title: Primer post
 description: Prueba desde GitCMS
-pubDate: 2025-07-26T06:00:00.000Z
+pubDate: 2025-07-24T06:00:00.000Z
 tags:
   - software
   - hardware
@@ -9,4 +9,4 @@ tags:
 
 Este es un post de prueba editado desde GitCMS
 
-> Nota
+>  Nota 
